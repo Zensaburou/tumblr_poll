@@ -13,7 +13,7 @@ gem 'tumblr_client'
 gem 'activerecord'
 gem 'sqlite3'
 
-group :development do
+group :development, :test do
   gem 'rspec'
   gem 'guard'
   gem 'guard-rspec'

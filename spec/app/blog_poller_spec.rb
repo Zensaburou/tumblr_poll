@@ -7,7 +7,16 @@ RSpec.describe BlogPoller do
   let(:posts_hash) { JSON.parse(posts_json)['posts'] }
   let(:blog) { Blog.create(url: 'foobarbaz.tumblr.com') }
 
-  let(:subject) { BlogPoller.new(blog) }
+  let(:subject) { BlogPoller.new(blog, 1, 0) }
+
+  describe 'initialize' do
+    it 'sets the instance variables' do
+      poller = BlogPoller.new(blog, 10, 1)
+      expect(poller.instance_variable_get(:@blog)).to eq blog
+      expect(poller.instance_variable_get(:@newest_timestamp)).to eq 10
+      expect(poller.instance_variable_get(:@oldest_timestamp)).to eq 1
+    end
+  end
 
   describe :poll_posts do
     it 'saves only posts within the time range' do

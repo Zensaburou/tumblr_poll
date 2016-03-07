@@ -1,4 +1,7 @@
 require 'active_record'
+require_relative 'blog_poller'
+require_relative 'tumblr_poller'
+require_relative 'tumblr_interface'
 
 # ActiveRecord::Base.logger = Logger.new(STDERR)
 ActiveRecord::Base.establish_connection(
@@ -7,7 +10,7 @@ ActiveRecord::Base.establish_connection(
 )
 
 class Blog < ActiveRecord::Base
-  has_many :blogs
+  has_many :posts
 end
 
 class Post < ActiveRecord::Base

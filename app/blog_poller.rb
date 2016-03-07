@@ -1,8 +1,7 @@
 require_relative 'application'
-require_relative 'tumblr_interface'
 
 class BlogPoller
-  def initialize(blog, newest_timestamp=0, oldest_timestamp=0)
+  def initialize(blog, newest_timestamp, oldest_timestamp)
     @blog = blog
     @newest_timestamp = newest_timestamp
     @oldest_timestamp = oldest_timestamp
