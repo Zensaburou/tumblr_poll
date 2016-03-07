@@ -2,7 +2,7 @@ require 'tumblr_client'
 require 'dotenv'
 Dotenv.load
 
-class TumblrClient
+class TumblrInterface
   attr_reader :client
 
   def initialize

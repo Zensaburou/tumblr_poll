@@ -18,7 +18,7 @@ ActiveRecord::Schema.define do
 
   unless ActiveRecord::Base.connection.tables.include? 'blogs'
     create_table :blogs do |t|
-      t.column :blog_url, :text
+      t.column :url, :text
     end
   end
 end

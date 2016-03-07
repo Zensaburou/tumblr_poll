@@ -1,4 +1,5 @@
 require_relative 'application'
+require_relative 'tumblr_interface'
 
 class BlogPoller
   def initialize(blog, newest_timestamp=0, oldest_timestamp=0)
@@ -8,6 +9,7 @@ class BlogPoller
   end
 
   def poll_posts
+    status = ''
     offset = 0
     until status == 'complete'
       posts = post_list(offset)
@@ -16,16 +18,16 @@ class BlogPoller
     end
   end
 
+  def post_list(offset=0)
+    TumblrInterface.new.client.posts(@blog.url, limit: 20, offset: offset)['posts']
+  end
+
   def parse_post_list(posts)
     posts.each do |post|
       next if post_too_recent?(post)
       return 'complete' if post_too_old?(post)
       save_post(post)
     end
-  end
-
-  def post_list(offset=0)
-    TumblrClient.new.client.posts(@blog.url, limit: 20, offset: offset)['posts']
   end
 
   def post_too_recent?(post)
