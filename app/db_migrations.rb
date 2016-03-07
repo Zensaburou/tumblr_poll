@@ -19,6 +19,7 @@ ActiveRecord::Schema.define do
   unless ActiveRecord::Base.connection.tables.include? 'blogs'
     create_table :blogs do |t|
       t.column :url, :text
+      t.column :completed, :boolean, default: false
     end
   end
 end

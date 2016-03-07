@@ -10,9 +10,11 @@ RSpec.describe BlogPoller do
   let(:subject) { BlogPoller.new(blog) }
 
   describe :poll_posts do
-    it 'saves posts within the time range' do
+    it 'saves only posts within the time range' do
       blogpoller = BlogPoller.new(blog, 1457302322, 1457302320)
       allow(blogpoller).to receive(:post_list) { posts_hash }
+
+      expect(blogpoller).to receive(:post_list).once
       expect{blogpoller.poll_posts}.to change(Post.all, :count).by 1
     end
   end
@@ -23,9 +25,11 @@ RSpec.describe BlogPoller do
       expect{blogpoller.parse_post_list(posts_hash)}.to change(Post.all, :count).by 0
     end
 
-    it 'returns complete once an old enough post is found' do
+    it 'updates blog once an old enough post is found' do
       blogpoller = BlogPoller.new(blog, 1457302322, 1457300594)
-      expect(blogpoller.parse_post_list(posts_hash)).to eq 'complete'
+      blogpoller.parse_post_list(posts_hash)
+      blog.reload
+      expect(blog.completed).to be_truthy
     end
   end
 
