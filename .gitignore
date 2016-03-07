@@ -1,0 +1,12 @@
+# Vim
+*.swo
+*.swp
+
+# RVM
+.ruby-*
+
+# Environment
+.env
+
+# Sqlite database
+database.db
