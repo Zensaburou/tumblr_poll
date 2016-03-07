@@ -12,6 +12,7 @@ RSpec.describe BlogPoller do
   describe :poll_posts do
     it 'saves posts within the time range' do
       blogpoller = BlogPoller.new(blog, 1457302322, 1457302320)
+      allow(blogpoller).to receive(:post_list) { posts_hash }
       expect{blogpoller.poll_posts}.to change(Post.all, :count).by 1
     end
   end
