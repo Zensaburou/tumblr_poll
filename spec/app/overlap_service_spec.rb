@@ -1,9 +1,28 @@
 require_relative '../spec_helper'
 
 RSpec.describe OverlapService do
+  before do
+    Blog.destroy_all
+    Post.destroy_all
+    Comparison.destroy_all
+  end
+
   let(:subject) { OverlapService.new }
   let(:first_blog) { Blog.create(url: 'spam') }
   let(:second_blog) { Blog.create(url: 'baz') }
+
+  describe :calculate_all_overlaps do
+    it 'calculates a comparison for every possible blog pair' do
+      first_blog
+      second_blog
+      Blog.create(url: 'boogidy')
+      allow_any_instance_of(OverlapService).to receive(:calculate_overlap) { 1 }
+
+      subject.calculate_all_overlaps
+      expect(Comparison.count).to eq 3
+      expect(Comparison.first.overlap).to eq 1
+    end
+  end
 
   describe :calculate_overlap do
   end
