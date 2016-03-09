@@ -17,7 +17,7 @@ class BlogPoller
     end
   end
 
-  def post_list(offset=0)
+  def post_list(offset = 0)
     TumblrInterface.new.client.posts(@blog.url, limit: 20, offset: offset)['posts']
   end
 
