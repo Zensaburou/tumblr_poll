@@ -27,38 +27,6 @@ RSpec.describe OverlapService do
   describe :calculate_overlap do
   end
 
-  describe :unique_source_count_for do
-    it 'returns count of unique source titles' do
-      Post.create(blog_id: first_blog.id, source_title: '')
-      Post.create(blog_id: first_blog.id, source_title: nil)
-      Post.create(blog_id: first_blog.id, source_title: 'foo')
-      Post.create(blog_id: first_blog.id, source_title: 'foo')
-
-      expect(subject.unique_source_count_for(first_blog)).to eq 1
-    end
-  end
-
-  describe :source_count_for do
-    it 'returns count of times a source appears in a blog' do
-      Post.create(blog_id: first_blog.id, source_title: 'bar')
-      Post.create(blog_id: first_blog.id, source_title: 'bar')
-      Post.create(blog_id: first_blog.id, source_title: 'foo')
-
-      expect(subject.source_count_for(first_blog, 'bar')).to be 2
-    end
-  end
-
-  describe :reblogged_post_count_for do
-    it 'returns a count of posts with a source title' do
-      Post.create(blog_id: first_blog.id, source_title: 'bar')
-      Post.create(blog_id: first_blog.id, source_title: 'foo')
-      Post.create(blog_id: first_blog.id, source_title: '')
-      Post.create(blog_id: first_blog.id, source_title: nil)
-
-      expect(subject.reblogged_post_count_for(first_blog)).to be 2
-    end
-  end
-
   describe :simpson_index_for do
     it 'sums the sub indices' do
       Post.create(blog_id: first_blog.id, source_title: 'bar')

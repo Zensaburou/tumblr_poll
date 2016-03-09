@@ -29,7 +29,7 @@ class OverlapService
 
   def denominator(first_blog, second_blog)
     simpson_sum = (simpson_index_for(first_blog) + simpson_index_for(second_blog))
-    total_post_product = reblogged_post_count_for(first_blog) * reblogged_post_count(second_blog)
+    total_post_product = first_blog.reblogged_post_count * second_blog.reblogged_post
     simpson_sum * total_post_product
   end
 
@@ -40,53 +40,30 @@ class OverlapService
 
   def series(first_blog, second_blog)
     sum = 0
-    uniq_sources = unique_sources_for(first_blog)
+    uniq_sources = first_blog.unique_sources
     uniq_sources.each { |source| sum += source_count_product(first_blog, second_blog, source) }
     sum
   end
 
   def source_count_product(first_blog, second_blog, source)
     # x_i * y_i
-    source_count_for(first_blog, source) * source_count_for(second_blog, source)
+    first_blog.source_count(source) * second_blog.source_count(source)
   end
 
   def simpson_index_for(blog)
     # D_x
     sum = 0
-    uniq_sources = unique_sources_for(blog)
+    uniq_sources = blog.unique_sources
     uniq_sources.each { |source| sum += simpson_sub_index_for(blog, source) }
     sum
   end
 
   def simpson_sub_index_for(blog, source_title)
     # x_i(x_i -1) / X(X-1)
-    source_count = source_count_for(blog, source_title)
-    reblogged_post_count = reblogged_post_count_for(blog)
+    source_count = blog.source_count(source_title)
+    reblogged_post_count = blog.reblogged_post_count
     numerator = source_count * (source_count - 1)
     denominator = reblogged_post_count * (reblogged_post_count - 1)
     numerator / denominator
-  end
-
-  def reblogged_post_count_for(blog)
-    # X
-    reblogged_posts_for(blog).count
-  end
-
-  def reblogged_posts_for(blog)
-    blog.posts.where.not(source_title: nil).where.not(source_title: '')
-  end
-
-  def unique_source_count_for(blog)
-    # S
-    unique_sources_for(blog).count
-  end
-
-  def unique_sources_for(blog)
-    reblogged_posts_for(blog).pluck(:source_title).uniq
-  end
-
-  def source_count_for(blog, source_title)
-    # x_i, y_i
-    blog.posts.where(source_title: source_title).count
   end
 end
