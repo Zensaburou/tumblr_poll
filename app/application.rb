@@ -2,6 +2,7 @@ require 'active_record'
 require_relative 'blog_poller'
 require_relative 'tumblr_poller'
 require_relative 'tumblr_interface'
+require_relative 'overlap_service'
 
 # ActiveRecord::Base.logger = Logger.new(STDERR)
 ActiveRecord::Base.establish_connection(
@@ -15,4 +16,7 @@ end
 
 class Post < ActiveRecord::Base
   belongs_to :blog
+end
+
+class Comparison < ActiveRecord::Base
 end

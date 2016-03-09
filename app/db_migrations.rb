@@ -22,5 +22,13 @@ ActiveRecord::Schema.define do
       t.column :completed, :boolean, default: false
     end
   end
+
+  unless ActiveRecord::Base.connection.tables.include? 'comparisons'
+    create_table :comparisons do |t|
+      t.column :first_blog_id, :integer
+      t.column :second_blog_id, :integer
+      t.column :overlap, :decimal
+    end
+  end
 end
 
