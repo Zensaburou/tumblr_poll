@@ -3,6 +3,7 @@ require_relative 'blog_poller'
 require_relative 'tumblr_poller'
 require_relative 'tumblr_interface'
 require_relative 'overlap_service'
+require_relative 'simpson_service'
 
 require_relative './models/blog'
 require_relative './models/post'

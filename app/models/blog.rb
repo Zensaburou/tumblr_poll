@@ -1,3 +1,5 @@
+require_relative '../application'
+
 class Blog < ActiveRecord::Base
   has_many :posts
 

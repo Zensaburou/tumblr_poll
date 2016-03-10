@@ -20,6 +20,7 @@ ActiveRecord::Schema.define do
     create_table :blogs do |t|
       t.column :url, :text
       t.column :completed, :boolean, default: false
+      t.column :simpson_index, :float
     end
   end
 
@@ -27,8 +28,7 @@ ActiveRecord::Schema.define do
     create_table :comparisons do |t|
       t.column :first_blog_id, :integer
       t.column :second_blog_id, :integer
-      t.column :overlap, :decimal
+      t.column :overlap, :float
     end
   end
 end
-

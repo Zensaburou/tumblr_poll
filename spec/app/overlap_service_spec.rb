@@ -27,32 +27,6 @@ RSpec.describe OverlapService do
   describe :calculate_overlap do
   end
 
-  describe :simpson_index_for do
-    it 'sums the sub indices' do
-      Post.create(blog_id: first_blog.id, source_title: 'bar')
-      Post.create(blog_id: first_blog.id, source_title: 'bar')
-      Post.create(blog_id: first_blog.id, source_title: 'bar')
-      Post.create(blog_id: first_blog.id, source_title: 'foo')
-      Post.create(blog_id: first_blog.id, source_title: 'foo')
-      Post.create(blog_id: first_blog.id, source_title: nil)
-
-      result = subject.simpson_index_for(first_blog)
-      expect(result).to eq 2 / 5
-    end
-  end
-
-  describe :simpson_sub_index_for do
-    it 'calculates the index correctly' do
-      Post.create(blog_id: first_blog.id, source_title: 'bar')
-      Post.create(blog_id: first_blog.id, source_title: 'bar')
-      Post.create(blog_id: first_blog.id, source_title: 'foo')
-      Post.create(blog_id: first_blog.id, source_title: nil)
-
-      result = subject.simpson_sub_index_for(first_blog, 'bar')
-      expect(result).to eq 1 / 3
-    end
-  end
-
   describe :source_count_product do
     it 'returns product of the source counts' do
       Post.create(blog_id: first_blog.id, source_title: 'bar')

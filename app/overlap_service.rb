@@ -28,14 +28,9 @@ class OverlapService
   end
 
   def denominator(first_blog, second_blog)
-    simpson_sum = (simpson_index_for(first_blog) + simpson_index_for(second_blog))
+    simpson_sum = (first_blog.simpson_index + second_blog.simpson_index)
     total_post_product = first_blog.reblogged_post_count * second_blog.reblogged_post
     simpson_sum * total_post_product
-  end
-
-  def simpson_sum(blog)
-    # D_x + D_y
-    simpson_index_for(blog)
   end
 
   def series(first_blog, second_blog)
@@ -48,22 +43,5 @@ class OverlapService
   def source_count_product(first_blog, second_blog, source)
     # x_i * y_i
     first_blog.source_count(source) * second_blog.source_count(source)
-  end
-
-  def simpson_index_for(blog)
-    # D_x
-    sum = 0
-    uniq_sources = blog.unique_sources
-    uniq_sources.each { |source| sum += simpson_sub_index_for(blog, source) }
-    sum
-  end
-
-  def simpson_sub_index_for(blog, source_title)
-    # x_i(x_i -1) / X(X-1)
-    source_count = blog.source_count(source_title)
-    reblogged_post_count = blog.reblogged_post_count
-    numerator = source_count * (source_count - 1)
-    denominator = reblogged_post_count * (reblogged_post_count - 1)
-    numerator / denominator
   end
 end
