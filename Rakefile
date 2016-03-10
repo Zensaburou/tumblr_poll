@@ -15,3 +15,20 @@ namespace :db do
 
   task reset: [:drop, :create]
 end
+
+namespace :tumblr do
+  task :poll do
+    require_relative 'app/application'
+    TumbrPoller.new.poll_tumblr
+  end
+
+  task :simpsons do
+    require_relative 'app/application'
+    SimpsonService.new.calculate_all_indices
+  end
+
+  task :overlaps do
+    require_relative 'app/application'
+    OverlapService.new.calculate_all_overlaps
+  end
+end
