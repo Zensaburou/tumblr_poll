@@ -7,7 +7,7 @@ A [Morishita Overlap Index](https://en.wikipedia.org/wiki/Morisita%27s_overlap_i
 
 * Create database with `$ rake db:create`
 
-* Add `.env` to the following directory according to the following template:
+* Add `.env` to the root directory according to the following template:
 
 ```
 NEWEST_TIMESTAMP: <Most recent timestamp>
@@ -20,7 +20,7 @@ OAUTH_TOKEN_SECRET: <tumblr API oauth token secret>
 
 #### Polling and analyzing data
 
-Run the poll with `$ rake tumblr:poll`. All posts within the given time range for each blog in the database
+Run the poll with `$ rake tumblr:poll`. Posts are saved within the given timestamp range for each blog in the database
 
 Simpson indices can be calculated on blogs with `$ rake tumblr:simpsons`
 
