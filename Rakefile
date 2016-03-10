@@ -1,4 +1,4 @@
-task default: %w[test]
+task default: %w(test)
 
 task :test do
   sh 'bundle exec rspec spec'
@@ -14,4 +14,21 @@ namespace :db do
   end
 
   task reset: [:drop, :create]
+end
+
+namespace :tumblr do
+  task :poll do
+    require_relative 'app/application'
+    TumbrPoller.new.poll_tumblr
+  end
+
+  task :simpsons do
+    require_relative 'app/application'
+    SimpsonService.new.calculate_all_indices
+  end
+
+  task :overlaps do
+    require_relative 'app/application'
+    OverlapService.new.calculate_all_overlaps
+  end
 end

@@ -24,14 +24,14 @@ RSpec.describe BlogPoller do
       allow(blogpoller).to receive(:post_list) { posts_hash }
 
       expect(blogpoller).to receive(:post_list).once
-      expect{blogpoller.poll_posts}.to change(Post.all, :count).by 1
+      expect { blogpoller.poll_posts }.to change(Post.all, :count).by 1
     end
   end
 
   describe :parse_post_list do
     it 'skips posts that are too recent' do
       blogpoller = BlogPoller.new(blog, 2, 1)
-      expect{blogpoller.parse_post_list(posts_hash)}.to change(Post.all, :count).by 0
+      expect { blogpoller.parse_post_list(posts_hash) }.to change(Post.all, :count).by 0
     end
 
     it 'updates blog once an old enough post is found' do
@@ -50,7 +50,7 @@ RSpec.describe BlogPoller do
       expect(post.post_id).to eq 140590519517
       expect(post.post_url).to eq 'http://foobarbaz.tumblr.com/post/140590519517/this-is-my-shit'
       expect(post.note_count).to eq 34708
-      expect(post.date).to eq "2016-03-06 22:12:01 GMT"
+      expect(post.date).to eq '2016-03-06 22:12:01 GMT'
       expect(post.post_type).to eq 'photo'
       expect(post.timestamp).to eq 1457302321
       expect(post.source_title).to eq 'spambarbaz'
@@ -63,9 +63,9 @@ RSpec.describe BlogPoller do
     it 'returns the correct hash' do
       expected_hash = {
         post_id: 140590519517,
-        post_url: "http://foobarbaz.tumblr.com/post/140590519517/this-is-my-shit",
+        post_url: 'http://foobarbaz.tumblr.com/post/140590519517/this-is-my-shit',
         note_count: 34708,
-        date: "2016-03-06 22:12:01 GMT",
+        date: '2016-03-06 22:12:01 GMT',
         post_type: 'photo',
         timestamp: 1457302321,
         source_title: 'spambarbaz',
