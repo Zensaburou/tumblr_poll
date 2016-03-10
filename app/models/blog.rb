@@ -1,6 +1,8 @@
 require_relative '../application'
 
 class Blog < ActiveRecord::Base
+  attr_reader :simpson_index
+
   has_many :posts
 
   def reblogged_post_count
@@ -24,5 +26,9 @@ class Blog < ActiveRecord::Base
   def source_count(source_title)
     # x_i, y_i
     posts.where(source_title: source_title).count
+  end
+
+  def simpson_index
+    simpson_index ||= SimpsonService.new.index_for(self)
   end
 end

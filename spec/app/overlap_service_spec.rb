@@ -16,15 +16,30 @@ RSpec.describe OverlapService do
       first_blog
       second_blog
       Blog.create(url: 'boogidy')
-      allow_any_instance_of(OverlapService).to receive(:calculate_overlap) { 1 }
+      allow_any_instance_of(OverlapService).to receive(:calculate_overlap) { (3 / 2) }
 
       subject.calculate_all_overlaps
       expect(Comparison.count).to eq 3
-      expect(Comparison.first.overlap).to eq 1
+      expect(Comparison.first.first_blog_id).to eq first_blog.id
+      expect(Comparison.first.second_blog_id).to eq second_blog.id
+      expect(Comparison.first.overlap).to eq (3 / 2).to_f
     end
   end
 
   describe :calculate_overlap do
+    it 'returns the correct index' do
+      Post.create(blog_id: first_blog.id, source_title: 'bar')
+      Post.create(blog_id: first_blog.id, source_title: 'bar')
+      Post.create(blog_id: first_blog.id, source_title: 'foo')
+
+      Post.create(blog_id: second_blog.id, source_title: 'bar')
+      Post.create(blog_id: second_blog.id, source_title: 'bar')
+      Post.create(blog_id: second_blog.id, source_title: 'foo')
+      Post.create(blog_id: second_blog.id, source_title: 'foo')
+
+      result = subject.calculate_overlap(first_blog.id, second_blog.id)
+      expect(result).to eq(3 / 2)
+    end
   end
 
   describe :source_count_product do

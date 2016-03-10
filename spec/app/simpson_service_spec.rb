@@ -7,10 +7,10 @@ RSpec.describe SimpsonService do
   describe :calculate_all_indices do
     it 'saves the index for each blog' do
       blog
-      allow_any_instance_of(SimpsonService).to receive(:index_for) { 1 }
+      allow_any_instance_of(SimpsonService).to receive(:index_for) { (1 / 3) }
       SimpsonService.new.calculate_all_indices
       blog.reload
-      expect(blog.simpson_index).to eq 1
+      expect(blog.simpson_index).to eq (1 / 3).to_f
     end
   end
 
