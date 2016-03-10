@@ -28,7 +28,7 @@ class OverlapService
   end
 
   def denominator(first_blog, second_blog)
-    simpson_sum = (first_blog.simpson_index + second_blog.simpson_index)
+    simpson_sum = (first_blog.get_simpson_index + second_blog.get_simpson_index)
     total_post_product = first_blog.reblogged_post_count * second_blog.reblogged_post_count
     simpson_sum * total_post_product
   end

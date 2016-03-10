@@ -10,7 +10,7 @@ RSpec.describe SimpsonService do
       allow_any_instance_of(SimpsonService).to receive(:index_for) { (1 / 3) }
       SimpsonService.new.calculate_all_indices
       blog.reload
-      expect(blog.simpson_index).to eq (1 / 3).to_f
+      expect(blog.simpson_index).to eq((1 / 3).to_f)
     end
   end
 

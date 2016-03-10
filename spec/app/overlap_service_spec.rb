@@ -22,7 +22,7 @@ RSpec.describe OverlapService do
       expect(Comparison.count).to eq 3
       expect(Comparison.first.first_blog_id).to eq first_blog.id
       expect(Comparison.first.second_blog_id).to eq second_blog.id
-      expect(Comparison.first.overlap).to eq (3 / 2).to_f
+      expect(Comparison.first.overlap).to eq((3 / 2).to_f)
     end
   end
 

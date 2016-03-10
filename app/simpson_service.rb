@@ -3,7 +3,11 @@ require_relative 'application'
 
 class SimpsonService
   def calculate_all_indices
-    Blog.all.each { |b| b.update(simpson_index: index_for(b)) }
+    Blog.all.each { |b| calculate_and_save_index(b) }
+  end
+
+  def calculate_and_save_index(blog)
+    blog.update(simpson_index: index_for(blog))
   end
 
   def index_for(blog)

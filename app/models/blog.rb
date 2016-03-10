@@ -1,7 +1,7 @@
 require_relative '../application'
 
 class Blog < ActiveRecord::Base
-  attr_reader :simpson_index
+  attr_reader :get_simpson_index
 
   has_many :posts
 
@@ -28,7 +28,7 @@ class Blog < ActiveRecord::Base
     posts.where(source_title: source_title).count
   end
 
-  def simpson_index
-    simpson_index ||= SimpsonService.new.index_for(self)
+  def get_simpson_index
+    simpson_index || SimpsonService.new.index_for(self)
   end
 end
