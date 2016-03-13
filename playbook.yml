@@ -11,3 +11,4 @@
     - role: rvm_io.rvm1-ruby
       rvm1_rubyies:
         = 'ruby-2.2.2'
+      rvm1_user: 'tumblr'
