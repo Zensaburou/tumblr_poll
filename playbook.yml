@@ -5,8 +5,8 @@
     - name: update apt packages
       apt: update_cache=yes
 
-      - name: ensure git installed
-        apt: name=git state=present
+    - name: ensure git installed
+      apt: name=git state=present
   roles:
     - role: rvm_io.rvm1-ruby
       rvm1_rubyies:
