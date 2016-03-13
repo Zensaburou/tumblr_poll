@@ -19,7 +19,7 @@ end
 namespace :tumblr do
   task :poll do
     require_relative 'app/application'
-    TumbrPoller.new.poll_tumblr
+    TumblrPoller.new.poll_tumblr
   end
 
   task :simpsons do

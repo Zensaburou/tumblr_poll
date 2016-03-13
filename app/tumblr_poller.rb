@@ -10,6 +10,7 @@ class TumblrPoller
   end
 
   def blog_poller(blog)
+    puts "Checking #{blog.url}"
     started?(blog) ? incomplete_poller(blog) : new_poller(blog)
   end
 
