@@ -10,3 +10,6 @@
 
 # Sqlite database
 database.db
+
+# Database files
+db_backups/
