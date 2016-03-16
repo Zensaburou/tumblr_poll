@@ -9,7 +9,7 @@
 .env
 
 # Sqlite database
-database.db
+db/database.db
 
 # Database files
-db_backups/
+db/db_backups/
