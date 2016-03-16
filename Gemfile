@@ -10,6 +10,7 @@ gem 'tumblr_client'
 
 gem 'activerecord'
 gem 'sqlite3'
+gem 'standalone_migrations'
 
 group :development, :test do
   gem 'rspec'
