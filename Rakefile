@@ -1,10 +1,17 @@
 require 'standalone_migrations'
 StandaloneMigrations::Tasks.load_tasks
 
-task default: %w(test)
+task default: %w(db:reset test)
 
 task :test do
   sh 'bundle exec rspec spec'
+end
+
+task benchmarks: %w(db:reset run_benchmarks)
+
+task :run_benchmarks do
+  require_relative 'spec/benchmarks'
+  Benchmarker.new.run_benchmarks
 end
 
 namespace :tumblr do
