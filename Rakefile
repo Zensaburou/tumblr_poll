@@ -7,6 +7,11 @@ task :test do
   sh 'bundle exec rspec spec'
 end
 
+task :benchmarks do
+  require_relative 'spec/benchmarks'
+  Benchmarker.new.run_benchmarks
+end
+
 namespace :tumblr do
   task :poll do
     require_relative 'app/application'
