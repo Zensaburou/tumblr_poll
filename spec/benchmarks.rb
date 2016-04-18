@@ -35,7 +35,10 @@ class Benchmarker
       bm.report { save_posts_to_db(@posts) }
 
       @first_blog.posts.destroy_all
+      @first_blog.update!(completed: false)
+
       @second_blog.posts.destroy_all
+      @first_blog.update!(completed: false)
 
       puts 'Integration benchmark'
       bm.report { poll_blogs([@first_blog, @second_blog]) }

@@ -7,7 +7,9 @@ task :test do
   sh 'bundle exec rspec spec'
 end
 
-task :benchmarks do
+task benchmarks: %w(db:reset run_benchmarks)
+
+task :run_benchmarks do
   require_relative 'spec/benchmarks'
   Benchmarker.new.run_benchmarks
 end
