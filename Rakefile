@@ -1,7 +1,7 @@
 require 'standalone_migrations'
 StandaloneMigrations::Tasks.load_tasks
 
-task default: %w(test)
+task default: %w(db:reset test)
 
 task :test do
   sh 'bundle exec rspec spec'
