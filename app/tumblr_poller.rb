@@ -1,4 +1,5 @@
 require_relative 'application'
+require 'thread'
 
 class TumblrPoller
   def poll_tumblr
