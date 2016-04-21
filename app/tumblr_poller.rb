@@ -2,7 +2,7 @@ require_relative 'application'
 
 class TumblrPoller
   def poll_tumblr
-    incomplete_blogs.each { |blog| blog_poller(blog).async.poll_posts }
+    incomplete_blogs.each { |blog| blog_poller(blog).poll_posts }
   end
 
   def incomplete_blogs

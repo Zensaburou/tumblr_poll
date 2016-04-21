@@ -1,9 +1,6 @@
 require_relative 'application'
-require 'celluloid'
 
 class BlogPoller
-  include Celluloid
-
   def initialize(blog, newest_timestamp, oldest_timestamp)
     @blog = blog
     @newest_timestamp = newest_timestamp
