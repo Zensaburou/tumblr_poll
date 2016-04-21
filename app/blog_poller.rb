@@ -9,10 +9,10 @@ class BlogPoller
 
   def poll_posts
     offset = 0
-    until @blog.completed
+    loop do
       posts = post_list(offset)
-      parse_post_list(posts)
-      @blog.reload
+      status = parse_post_list(posts)
+      return @blog.update(completed: true) if status == :finished
       offset += 20
     end
   end
@@ -24,7 +24,7 @@ class BlogPoller
   def parse_post_list(posts)
     posts.each do |post|
       next if post_too_recent?(post)
-      return @blog.update(completed: true) if post_too_old?(post)
+      return :finished if post_too_old?(post)
       save_post(post)
     end
   end

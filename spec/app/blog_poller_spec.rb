@@ -26,6 +26,15 @@ RSpec.describe BlogPoller do
       expect(blogpoller).to receive(:post_list).once
       expect { blogpoller.poll_posts }.to change(Post.all, :count).by 1
     end
+
+    it 'updates the blog when finished' do
+      blogpoller = BlogPoller.new(blog, 1457302322, 1457302320)
+      allow(blogpoller).to receive(:post_list) { posts_hash }
+      blogpoller.poll_posts
+
+      blog.reload
+      expect(blog.completed).to be_truthy
+    end
   end
 
   describe :parse_post_list do
@@ -34,11 +43,10 @@ RSpec.describe BlogPoller do
       expect { blogpoller.parse_post_list(posts_hash) }.to change(Post.all, :count).by 0
     end
 
-    it 'updates blog once an old enough post is found' do
+    it 'returns finished once an old enough post is found' do
       blogpoller = BlogPoller.new(blog, 1457302322, 1457300594)
-      blogpoller.parse_post_list(posts_hash)
-      blog.reload
-      expect(blog.completed).to be_truthy
+      result = blogpoller.parse_post_list(posts_hash)
+      expect(result).to eq :finished
     end
   end
 
