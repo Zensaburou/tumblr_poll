@@ -13,7 +13,7 @@ class SimpsonService
   def index_for(blog)
     # D_x / X(X-1)
     reblogged_post_count = blog.reblogged_post_count
-    return 1 if reblogged_post_count == 1
+    return 1 if [1, 0].include?(reblogged_post_count)
 
     denominator = reblogged_post_count * (reblogged_post_count - 1)
     numerator(blog) / denominator

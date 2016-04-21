@@ -36,6 +36,14 @@ RSpec.describe SimpsonService do
         expect(result).to eq 1
       end
     end
+
+    context 'no reblogged posts' do
+      it 'returns 1' do
+        Post.create(blog_id: blog.id, source_title: nil)
+        result = subject.index_for(blog)
+        expect(result).to eq 1
+      end
+    end
   end
 
   describe :sub_index_for do
