@@ -10,7 +10,7 @@ RSpec.describe SimpsonService do
       allow_any_instance_of(SimpsonService).to receive(:index_for) { (1 / 3) }
       SimpsonService.new.calculate_all_indices
       blog.reload
-      expect(blog.simpson_index).to eq(BigDecimal.new(1/3, 10))
+      expect(blog.simpson_index).to eq(BigDecimal.new(1 / 3, 10))
     end
   end
 
@@ -46,7 +46,7 @@ RSpec.describe SimpsonService do
       Post.create(blog_id: blog.id, source_title: nil)
 
       result = subject.sub_index_for(blog, 'bar')
-      expect(result).to eq 1 / 3
+      expect(result).to eq 2
     end
   end
 end

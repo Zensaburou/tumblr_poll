@@ -11,19 +11,25 @@ class SimpsonService
   end
 
   def index_for(blog)
-    # D_x
-    sum = 0
-    uniq_sources = blog.unique_sources
-    uniq_sources.each { |source| sum += sub_index_for(blog, source) }
-    sum
+    # D_x / X(X-1)
+    reblogged_post_count = blog.reblogged_post_count
+    return 1 if reblogged_post_count == 1
+
+    denominator = reblogged_post_count * (reblogged_post_count - 1)
+    numerator(blog) / denominator
   end
 
   def sub_index_for(blog, source_title)
-    # x_i(x_i -1) / X(X-1)
+    # x_i(x_i -1)
     source_count = blog.source_count(source_title)
-    reblogged_post_count = blog.reblogged_post_count
-    numerator = source_count * (source_count - 1)
-    denominator = reblogged_post_count * (reblogged_post_count - 1)
-    numerator / denominator
+    source_count * (source_count - 1)
+  end
+
+  private
+
+  def numerator(blog)
+    uniq_sources = blog.unique_sources
+    sub_indices = uniq_sources.map { |s| sub_index_for(blog, s) }
+    sub_indices.inject(:+)
   end
 end
