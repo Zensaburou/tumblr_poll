@@ -7,7 +7,7 @@ class OverlapService
     blog_pairs.each do |blog_id_array|
       first_blog_id = blog_id_array[0]
       second_blog_id = blog_id_array[1]
-      overlap = calculate_overlap(Blog.find(first_blog_id), Blog.find(second_blog_id))
+      overlap = calculate_overlap(first_blog_id, second_blog_id)
 
       Comparison.create(
         first_blog_id: first_blog_id,

@@ -1,7 +1,7 @@
 ## Tumblr Poller
 
 This application polls post information in a given time range from the [Tumblr API](https://www.tumblr.com/docs/en/api/v2) and saves it to a SQLite database.
-A [Morishita Overlap Index](https://en.wikipedia.org/wiki/Morisita%27s_overlap_index) and a [Hunter-Gaston/Simpson Diversity Index](https://en.wikipedia.org/wiki/Morisita%27s_overlap_index) can then be calculated to determine the relative similarity of reblog source material as well as the diversity of reblog sources.
+A [Morishita Overlap Index](https://en.wikipedia.org/wiki/Morisita%27s_overlap_index) and a [Hunter-Gaston/Simpson Diversity Index](https://en.wikipedia.org/wiki/Diversity_index) can then be calculated to determine the relative similarity of reblog source material as well as the diversity of reblog sources.
 
 #### Setup
 

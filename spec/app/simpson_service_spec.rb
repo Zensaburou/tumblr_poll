@@ -26,6 +26,16 @@ RSpec.describe SimpsonService do
       result = subject.index_for(blog)
       expect(result).to eq 2 / 5
     end
+
+    context 'blog has exactly 1 reblogged post' do
+      it 'returns 1' do
+        # There is a 100% chance that any two randomly selected reblogged posts
+        # come from the same source
+        Post.create(blog_id: blog.id, source_title: 'bar')
+        result = subject.index_for(blog)
+        expect(result).to eq 1
+      end
+    end
   end
 
   describe :sub_index_for do

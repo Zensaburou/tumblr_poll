@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 gem 'rake'
 
+gem 'celluloid'
+
 # Environment
 gem 'dotenv'
 
