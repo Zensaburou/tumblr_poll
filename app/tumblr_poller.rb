@@ -2,10 +2,19 @@ require_relative 'application'
 
 class TumblrPoller
   def poll_tumblr
-    incomplete_blogs.each do |b|
-      blog_poller(b).poll_posts
-      b.update(completed: true)
+    poller_array = incomplete_blogs.map { |b| blog_poller(b) }
+    run_pollers(poller_array)
+  end
+
+  def run_pollers(blog_poller_array)
+    threads = []
+    blog_poller_array.each do |poller|
+      threads << Thread.new do
+        poller.poll_posts
+        poller.blog.update(completed: true)
+      end
     end
+    threads.map(&:join)
   end
 
   def incomplete_blogs

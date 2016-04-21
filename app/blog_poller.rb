@@ -1,6 +1,8 @@
 require_relative 'application'
 
 class BlogPoller
+  attr_accessor :blog
+
   def initialize(blog, newest_timestamp, oldest_timestamp)
     @blog = blog
     @newest_timestamp = newest_timestamp
@@ -13,12 +15,12 @@ class BlogPoller
       posts = post_list(offset)
       status = parse_post_list(posts)
       return if status == :finished
-      offset += 20
+      offset += 40
     end
   end
 
   def post_list(offset = 0)
-    TumblrInterface.new.client.posts(@blog.url, limit: 20, offset: offset)['posts']
+    TumblrInterface.new.client.posts(@blog.url, limit: 40, offset: offset)['posts']
   end
 
   def parse_post_list(posts)

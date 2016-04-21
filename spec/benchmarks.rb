@@ -4,7 +4,7 @@ require_relative '../app/application'
 class Benchmarker
   def initialize
     @newest_time = Time.now.to_i
-    @oldest_time = (Time.now - 5000000).to_i
+    @oldest_time = (Time.now - 10000000).to_i
     @blog_array = [
       Blog.create!(url: 'congressarchives.tumblr.com'),
       Blog.create!(url: 'whitehouse.tumblr.com'),
