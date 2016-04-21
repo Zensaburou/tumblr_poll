@@ -2,7 +2,10 @@ require_relative 'application'
 
 class TumblrPoller
   def poll_tumblr
-    incomplete_blogs.each { |blog| blog_poller(blog).poll_posts }
+    incomplete_blogs.each do |b|
+      blog_poller(b).poll_posts
+      b.update(completed: true)
+    end
   end
 
   def incomplete_blogs
@@ -10,7 +13,6 @@ class TumblrPoller
   end
 
   def blog_poller(blog)
-    puts "Checking #{blog.url}"
     started?(blog) ? incomplete_poller(blog) : new_poller(blog)
   end
 

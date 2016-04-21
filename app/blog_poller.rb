@@ -12,7 +12,7 @@ class BlogPoller
     loop do
       posts = post_list(offset)
       status = parse_post_list(posts)
-      return @blog.update(completed: true) if status == :finished
+      return if status == :finished
       offset += 20
     end
   end

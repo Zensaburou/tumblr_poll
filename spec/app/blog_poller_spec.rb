@@ -26,15 +26,6 @@ RSpec.describe BlogPoller do
       expect(blogpoller).to receive(:post_list).once
       expect { blogpoller.poll_posts }.to change(Post.all, :count).by 1
     end
-
-    it 'updates the blog when finished' do
-      blogpoller = BlogPoller.new(blog, 1457302322, 1457302320)
-      allow(blogpoller).to receive(:post_list) { posts_hash }
-      blogpoller.poll_posts
-
-      blog.reload
-      expect(blog.completed).to be_truthy
-    end
   end
 
   describe :parse_post_list do
